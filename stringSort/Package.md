@@ -2,7 +2,7 @@ Allows to sort strings from Ballerina.
 
 # Package Overview
 
-The `stringSort` allows you to perform sorting of a string array. Functionality of bucket sort on strings is provided by `sort` function. If the strings contain non alphabetic characters, they will get the least precedence when sorting.
+The `stringSort` allows you to perform sorting of a string array. Functionality of bucket sort on arra of strings is provided by `sort` function. If the strings in array contain non alphabetic characters, they will get the least precedence when sorting.
 
 ## Compatibility
 
