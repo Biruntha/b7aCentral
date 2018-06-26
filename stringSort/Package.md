@@ -23,9 +23,9 @@ The `sort(string[] unsortedArray)` function retrieves the sorted array of string
 int[] unsortedArray = ["colombo", "kandy", "b7a", "wso2"];
 int[] result = stringSort:sort(unsortedArray);
 ```
-The `sort(string[] unsortedArray, string[] newAlphabet)` function retrieves the sorted array of string for the given unsorted array, based on the given alphabet.
+The `sortForAlphabet(string[] unsortedArray, string[] newAlphabet)` function retrieves the sorted array of string for the given unsorted array, based on the given alphabet.
 ```ballerina
 string[] unsortedArray = ["colombo", "kandy", "b7a", "wso2"];
 string[] alphabet = ["a","b","c","1","2","3"];
-string[] result = stringSort:sort(unsortedArray, alphabet);
+string[] result = stringSort:sortForAlphabet(unsortedArray, alphabet);
 ```
