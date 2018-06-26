@@ -1,9 +1,6 @@
-import ballerina/io;
 
 string[] result;
 string[] alphabet = ["a","b","c","d","e","f","g","h","i","j","k"
-,"l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
-string[] effectiveAlphabet = ["a","b","c","d","e","f","g","h","i","j","k"
 ,"l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
 
 type Bucket object {
@@ -20,7 +17,6 @@ type Bucket object {
 };
 
 function Bucket::sortBucket() {
-    io:println("sortBucket function");
     map buckets = bucketize(self.items, self.index);
     addToResultArray(buckets);
 }
@@ -28,9 +24,6 @@ function Bucket::sortBucket() {
 documentation {
     Returns sorted string array after performing bucket sort repeatedly. 
     Bydefault, sorting is done on the english alphabet order.
-    You can define a new set of characters to sort, by passing the desired alphabet string array,
-    using the initAlphabet(string[]) method. 
-    Use the resetAlphabet() method to reset the alphabet to english alphabet.
     If any character outside the alphabet isfound, it will get the least priority in sorting.
 
     P{{unsortedArray}} The unsorted string array
@@ -46,23 +39,19 @@ public function sort(string[] unsortedArray) returns string[] {
 }
 
 documentation {
-    Define a new set of characters to sort, by passing the desired alphabet string array. 
+    Returns sorted string array after performing bucket sort repeatedly on the given alphabet. 
+    If any character outside the alphabet is found, it will get the least priority in sorting.
 
-    P{{newAlphabet}} The new alphabet to follow in sorting
+    P{{unsortedArray}} The unsorted string array
+    P{{newAlphabet}} The vocabulary to do the sort
+    R{{}} The sorted string array
 }
-public function initAlphabet(string[] newAlphabet) {
-    effectiveAlphabet = newAlphabet;
-}
-
-documentation {
-    Reset the alphabet to english alphabet.
-}
-public function resetAlphabet() {
-    effectiveAlphabet = alphabet;
+public function sortForAlphabet(string[] unsortedArray, string[] newAlphabet) returns string[]{
+    alphabet = newAlphabet;
+    return sort(unsortedArray);
 }
 
 function bucketize(string[] strArray, int index) returns map {
-    io:println("bucketize function:" + strArray[0] + index);
     map bucketsMap;
     foreach item in strArray {
      addTobucket(item,index, bucketsMap);   
@@ -72,7 +61,6 @@ function bucketize(string[] strArray, int index) returns map {
 }
 
 function addTobucket(string item, int index, map bucketsMap){
-    io:println("addTobucket function");
     int nextIndex = index + 1;
     if (lengthof item < nextIndex) {
         //nothing to sort further, add to result
@@ -80,7 +68,7 @@ function addTobucket(string item, int index, map bucketsMap){
     }
 
     boolean matchFound = false;
-    foreach char in effectiveAlphabet {  
+    foreach char in alphabet {  
         if (item.substring(index, nextIndex).equalsIgnoreCase(char)) {
             populateMap(bucketsMap, char, item, index);
             matchFound = true;
@@ -95,7 +83,6 @@ function addTobucket(string item, int index, map bucketsMap){
 }
 
 function populateMap(map bucketmap, string key, string item, int index){
-    io:println("populateMap function");
     if(bucketmap.hasKey(key)) {
         Bucket buck = check <Bucket>bucketmap[key];
         buck.addItem(item);
@@ -109,11 +96,10 @@ function populateMap(map bucketmap, string key, string item, int index){
 }
 
 function addToResultArray(map buckets) {
-    io:println("addToResultArray");
     int i = 0;
     
-    while (i < lengthof effectiveAlphabet) {
-        string alpChar = effectiveAlphabet[i];
+    while (i < lengthof alphabet) {
+        string alpChar = alphabet[i];
         if (buckets.hasKey(alpChar)) {
             addToResultByKey(check <Bucket>buckets[alpChar]);
         }
@@ -126,9 +112,7 @@ function addToResultArray(map buckets) {
 }
 
 function addToResultByKey(Bucket thisBucket) {
-    io:println("addToResultByKey function");
     if (lengthof thisBucket.items > 1) {
-            io:println("in addToResultByKey:",thisBucket.items);
             thisBucket.sortBucket(); //create buckets again
         } else {
             //only one item in the bucket
