@@ -8,7 +8,7 @@ The `stringSort` allows you to perform sorting of a string array. Functionality 
 
 |      Language                           |       Version                  |
 |  :---------------------------:  |  :---------------------------: |
-|  Ballerina Language             |   0.975.0                      |
+|  Ballerina Language             |   0.982.0                      |
 
 ## Sample
 
