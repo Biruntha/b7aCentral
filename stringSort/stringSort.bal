@@ -21,14 +21,13 @@ function Bucket::sortBucket() {
     addToResultArray(buckets);
 }
 
-documentation {
-    Returns sorted string array after performing bucket sort repeatedly. 
-    Bydefault, sorting is done on the english alphabet order.
-    If any character outside the alphabet isfound, it will get the least priority in sorting.
 
-    P{{unsortedArray}} The unsorted string array
-    R{{}} The sorted string array
-}
+    # Returns sorted string array after performing bucket sort repeatedly. 
+    # Bydefault, sorting is done on the english alphabet order.
+    # If any character outside the alphabet isfound, it will get the least priority in sorting.
+
+    # + unsortedArray - The unsorted string array
+    # + return - The sorted string arra
 public function sort(string[] unsortedArray) returns string[] {
     result = [];
     Bucket initBucket = new Bucket();
@@ -38,14 +37,13 @@ public function sort(string[] unsortedArray) returns string[] {
     return result;
 }
 
-documentation {
-    Returns sorted string array after performing bucket sort repeatedly on the given alphabet. 
-    If any character outside the alphabet is found, it will get the least priority in sorting.
 
-    P{{unsortedArray}} The unsorted string array
-    P{{newAlphabet}} The vocabulary to do the sort
-    R{{}} The sorted string array
-}
+# Returns sorted string array after performing bucket sort repeatedly on the given alphabet. 
+# If any character outside the alphabet is found, it will get the least priority in sorting.
+
+# + unsortedArray - The unsorted string array
+# + newAlphabet - The vocabulary to do the sort
+# + return - The sorted string array
 public function sortForAlphabet(string[] unsortedArray, string[] newAlphabet) returns string[]{
     alphabet = newAlphabet;
     return sort(unsortedArray);
